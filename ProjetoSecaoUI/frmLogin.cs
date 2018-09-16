@@ -49,7 +49,7 @@ namespace ProjetoSecaoUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro inesperado ao se comunicar com o banco de dados." + Environment.NewLine + "Erro: " + ex.Message, "Erro de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro inesperado ao se comunicar com o banco de dados!" + Environment.NewLine + "Erro: " + ex.Message, "Erro de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
