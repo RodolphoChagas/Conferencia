@@ -44,7 +44,7 @@ namespace ProjetoSecaoUI
                 {
                     MessageBox.Show("Nome do usuário ou senha incorretos.", "Erro Login", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
-                }
+                } 
 
             }
             catch (Exception ex)
