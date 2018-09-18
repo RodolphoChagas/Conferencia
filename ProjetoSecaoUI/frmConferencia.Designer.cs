@@ -47,8 +47,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.visualizarSeçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            //this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            //this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -227,20 +227,20 @@
             // 
             // shapeContainer1
             // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(448, 624);
-            this.shapeContainer1.TabIndex = 170;
-            this.shapeContainer1.TabStop = false;
-            // 
-            // rectangleShape1
-            // 
-            this.rectangleShape1.Location = new System.Drawing.Point(108, 264);
-            this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(75, 23);
+            //this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            //this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            //this.shapeContainer1.Name = "shapeContainer1";
+            //this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            //this.rectangleShape1});
+            //this.shapeContainer1.Size = new System.Drawing.Size(448, 624);
+            //this.shapeContainer1.TabIndex = 170;
+            //this.shapeContainer1.TabStop = false;
+            //// 
+            //// rectangleShape1
+            //// 
+            //this.rectangleShape1.Location = new System.Drawing.Point(108, 264);
+            //this.rectangleShape1.Name = "rectangleShape1";
+            //this.rectangleShape1.Size = new System.Drawing.Size(75, 23);
             // 
             // frmConferencia
             // 
@@ -253,7 +253,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstVWConferencia);
-            this.Controls.Add(this.shapeContainer1);
+            //this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmConferencia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -285,7 +285,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem visualizarSeçõesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excluirToolStripMenuItem;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
+        //private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        //private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
     }
 }
