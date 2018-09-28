@@ -15,7 +15,7 @@ namespace ProjetoSecaoDao
 
             try
             {
-                conferencias = (new PetaPoco.Database("stringConexao")).Query<Conferencia>("SELECT * FROM ConferenciaEstoque ORDER BY Data desc").ToList();
+                conferencias = (new PetaPoco.Database("stringConexao")).Query<Conferencia>("SELECT * FROM Conferencia ORDER BY Data desc").ToList();
             }
             catch (Exception ex)
             {
@@ -26,11 +26,11 @@ namespace ProjetoSecaoDao
         }
 
 
-        public Conferencia GetConferencias(int codConferencia)
+        public Conferencia GetConferencias(int conferenciaId)
         {
             try
             {
-                return (new PetaPoco.Database("stringConexao")).SingleOrDefault<Conferencia>("SELECT * FROM ConferenciaEstoque WHERE CodConferencia = " + codConferencia);
+                return (new PetaPoco.Database("stringConexao")).SingleOrDefault<Conferencia>("SELECT * FROM Conferencia WHERE conferencia_id = " + conferenciaId);
             }
             catch (Exception)
             {
@@ -39,19 +39,17 @@ namespace ProjetoSecaoDao
         }
 
 
-        public bool InsereConferencia(Conferencia conferencia)
+        public object InsereConferencia(Conferencia conferencia)
         {
             try
             {
                 //return (new PetaPoco.Database("stringConexao")).Insert("Movdb", "NumDoc", true, pedido);
-                (new PetaPoco.Database("stringConexao")).Insert(conferencia);
+                return (new PetaPoco.Database("stringConexao")).Insert(conferencia);
             }
             catch (Exception ex)
             {
-                return false;
+                throw new Exception("Erro ao iniciar a conferência.");
             }
-
-            return true;
         }
 
         public bool DeletaConferencia(Conferencia conferencia)

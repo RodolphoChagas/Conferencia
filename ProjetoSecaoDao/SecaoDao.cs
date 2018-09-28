@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PetaPoco;
 using ProjetoSecaoModel;
 
 namespace ProjetoSecaoDao
@@ -10,13 +11,16 @@ namespace ProjetoSecaoDao
     public class SecaoDao
     {
 
-        public List<Secao> GetSecoesPorConferencia(int codConferencia)
+        public List<Secao> GetSecoesPorConferencia(int conferenciaId)
         {
             List<Secao> secoes;
 
             try
             {
-                secoes = (new PetaPoco.Database("stringConexao")).Query<Secao>("SELECT codconferencia,Usuario.coduser,nomeuser,numsecao, conferenciasecao.condicao FROM ConferenciaSecao INNER JOIN Usuario on ConferenciaSecao.CodUser = Usuario.CodUser WHERE CodConferencia=@0 GROUP BY CodConferencia, Usuario.CodUser, nomeuser, numSecao, conferenciasecao.condicao ORDER BY NumSecao", codConferencia).ToList();
+                using (var db = new Database("stringConexao"))
+                {
+                    secoes = db.Query<Secao>("SELECT secao_id, conferencia_id, Usuario.coduser as usuario_id, Conferencia_Secao.nome_usuario, numero_da_secao, status FROM Conferencia_Secao INNER JOIN Usuario on Conferencia_Secao.usuario_id = Usuario.CodUser WHERE conferencia_id=@0 ORDER BY numero_da_secao", conferenciaId).ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -26,11 +30,14 @@ namespace ProjetoSecaoDao
             return secoes;
         }
 
-        public Secao GetSecao(int codConferencia, int numSecao)
+        public Secao GetSecao(int conferenciaId, int numeroDaSecao)
         {
             try
             {
-                return (new PetaPoco.Database("stringConexao")).SingleOrDefault<Secao>("SELECT * FROM ConferenciaEstoque WHERE CodConferencia=@0 And numSecao=@1" , codConferencia, numSecao);
+                using (var db = new Database("stringConexao"))
+                {
+                    return db.SingleOrDefault<Secao>("SELECT * FROM Conferencia_Secao WHERE conferencia_id=@0 And numero_secao=@1", conferenciaId, numeroDaSecao);
+                }
             }
             catch (Exception)
             {

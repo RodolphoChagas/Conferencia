@@ -8,20 +8,16 @@ namespace ProjetoSecaoUI
 {
     public partial class frmSecao : Form
     {
-        private readonly Conferencia _conferencia = new Conferencia();
-        private readonly int _secoesQtd = 0;
+        private readonly Conferencia _conferencia;
+
 
         public frmSecao(Conferencia conferencia)
         {
             InitializeComponent();
 
-
             try
             {
                 _conferencia = conferencia;
-                _secoesQtd = conferencia.secaoQtd;
-
-                _conferencia.lstSecoes = (new SecaoDao()).GetSecoesPorConferencia(_conferencia.codConferencia);
             }
             catch (Exception ex)
             {
@@ -29,13 +25,21 @@ namespace ProjetoSecaoUI
             }
         }
 
+
+        public void AtualizaEListaSecoes()
+        {
+            _conferencia.Secoes = (new SecaoDao()).GetSecoesPorConferencia(_conferencia.ConferenciaId);
+
+            GenerateTable(6, _conferencia.QuantidadeDeSecoes);
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             var vertScrollWidth = SystemInformation.VerticalScrollBarWidth;
             tblSecao.Padding = new Padding(0, 0, vertScrollWidth, 0);
 
-
-            GenerateTable(6, _secoesQtd);
+            AtualizaEListaSecoes();
         }
 
         private void GenerateTable(int columnCount, int secaoCount)
@@ -60,7 +64,7 @@ namespace ProjetoSecaoUI
             for (int w = 1; w <= secaoCount; w++)
             {
 
-                var secao = _conferencia.lstSecoes.Find(x => x.numSecao == w);
+                var secao = _conferencia.Secoes.Find(x => x.NumeroDaSecao == w);
                 
 
                 var colorBotao = Color.FromArgb(161, 222, 33);
@@ -69,17 +73,15 @@ namespace ProjetoSecaoUI
 
                 if (secao != null)
                 {
-                    switch (secao.condicao)
+                    switch (secao.Status)
                     {
                         case "D":
                             colorBotao = Color.FromArgb(235, 219, 68);
-                            textoBotao = "Seção em Contagem" + Environment.NewLine + Environment.NewLine + "Usuário: " +
-                                         secao.nomeUser;
+                            textoBotao = "Seção em Contagem" + Environment.NewLine + Environment.NewLine + "Usuário: " + (secao.UsuarioId == Usuario.getInstance.codUser ? "Você": secao.NomeUsuario);
                             break;
                         case "F":
                             colorBotao = Color.FromArgb(237, 84, 84);
-                            textoBotao = "Seção Finalizada" + Environment.NewLine + Environment.NewLine + "Usuário: " +
-                                         secao.nomeUser;
+                            textoBotao = "Seção Finalizada" + Environment.NewLine + Environment.NewLine + "Usuário: " + (secao.UsuarioId == Usuario.getInstance.codUser ? "Você" : secao.NomeUsuario);
                             break;
                     }
                 }
@@ -99,33 +101,33 @@ namespace ProjetoSecaoUI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void ControlsPanel_MouseDown(object sender, MouseEventArgs e)
         {
             var numSecao = Convert.ToInt32(((Button)sender).Tag);
 
-            var secao = _conferencia.lstSecoes.Find(x => x.numSecao == numSecao);
+            var secao = _conferencia.Secoes.Find(x => x.NumeroDaSecao == numSecao);
+            frmSecaoContagem frm;
+
 
             if (secao != null)
             {
-                //if (secao.codUser != Usuario.getInstance.codUser)
-                //{
-                //    MessageBox.Show("Acesso negado!" + Environment.NewLine + "Essa Seção está em contagem ou já foi finalizada por outro usuário!");
-                //    return;
-                //}
-                if (secao.condicao == "D")
+                if (secao.UsuarioId != Usuario.getInstance.codUser)
                 {
                     MessageBox.Show("Acesso negado!" + Environment.NewLine + "Essa Seção está em contagem por outro usuário!");
                     return;
                 }
+
+                frm = new frmSecaoContagem(numSecao, _conferencia.ConferenciaId, this, secao);
+            }
+            else
+            {
+                frm = new frmSecaoContagem(numSecao, _conferencia.ConferenciaId, this);
             }
 
-            var frm = new frmSecaoContagem(numSecao, 1);
             frm.ShowDialog();
+
+            AtualizaEListaSecoes();
         }
 
         private void frmSecao_KeyDown(object sender, KeyEventArgs e)

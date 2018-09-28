@@ -7,18 +7,21 @@ using PetaPoco;
 
 namespace ProjetoSecaoModel
 {
-    [TableName("ConferenciaEstoque")]
-    [PrimaryKey("CodConferencia")]
+    [TableName("Conferencia")]
+    [PrimaryKey("conferencia_id")]
     public class Conferencia
     {
         
-        public int codConferencia { get; set; }
-        public string descricao { get; set; }
-        public int secaoQtd { get; set; }
-        [PetaPoco.Ignore]
-        public List<Secao> lstSecoes { get; set; }
+        [Column("conferencia_id")]
+        public int ConferenciaId { get; set; }
+        public string Descricao { get; set; }
+        [Column("quantidade_secoes")]
+        public int QuantidadeDeSecoes { get; set; }
         public DateTime data { get; set; }
         public int status { get; set; }
+
+        [PetaPoco.Ignore]
+        public List<Secao> Secoes { get; set; }
 
         public Conferencia() { }
     }

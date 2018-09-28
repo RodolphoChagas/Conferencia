@@ -47,8 +47,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.visualizarSeçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            //this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            //this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -110,6 +108,7 @@
             this.lstVWConferencia.UseCompatibleStateImageBehavior = false;
             this.lstVWConferencia.View = System.Windows.Forms.View.Details;
             this.lstVWConferencia.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstVWConferencia_MouseClick);
+            this.lstVWConferencia.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstVWConferencia_MouseDoubleClick);
             // 
             // codConferencia
             // 
@@ -158,7 +157,7 @@
             this.txtDescricaoConf.Name = "txtDescricaoConf";
             this.txtDescricaoConf.Size = new System.Drawing.Size(208, 21);
             this.txtDescricaoConf.TabIndex = 5;
-            this.txtDescricaoConf.Text = "Conferência est. livraria";
+            this.txtDescricaoConf.Text = "Conferência de estoque livraria";
             // 
             // label5
             // 
@@ -225,23 +224,6 @@
             this.excluirToolStripMenuItem.Text = "&Excluir";
             this.excluirToolStripMenuItem.Click += new System.EventHandler(this.excluirToolStripMenuItem_Click);
             // 
-            // shapeContainer1
-            // 
-            //this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            //this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            //this.shapeContainer1.Name = "shapeContainer1";
-            //this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            //this.rectangleShape1});
-            //this.shapeContainer1.Size = new System.Drawing.Size(448, 624);
-            //this.shapeContainer1.TabIndex = 170;
-            //this.shapeContainer1.TabStop = false;
-            //// 
-            //// rectangleShape1
-            //// 
-            //this.rectangleShape1.Location = new System.Drawing.Point(108, 264);
-            //this.rectangleShape1.Name = "rectangleShape1";
-            //this.rectangleShape1.Size = new System.Drawing.Size(75, 23);
-            // 
             // frmConferencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,8 +235,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstVWConferencia);
-            //this.Controls.Add(this.shapeContainer1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmConferencia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmConferencia_Load);

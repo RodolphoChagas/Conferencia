@@ -42,9 +42,9 @@ namespace ProjetoSecaoUI
 
             foreach (var conf in _conferencia)
             {
-                var ls = new ListViewItem(conf.codConferencia.ToString());
-                ls.SubItems.Add(conf.descricao);
-                ls.SubItems.Add(conf.secaoQtd.ToString("00"));
+                var ls = new ListViewItem(conf.ConferenciaId.ToString());
+                ls.SubItems.Add(conf.Descricao);
+                ls.SubItems.Add(conf.QuantidadeDeSecoes.ToString("00"));
                 ls.SubItems.Add(conf.data.ToString());
                 ls.SubItems.Add(conf.status == 0 ? "Aberta": "Finalizada");
 
@@ -69,20 +69,21 @@ namespace ProjetoSecaoUI
 
             var conferencia = new Conferencia
             {
-                descricao = txtDescricaoConf.Text.Trim(),
-                secaoQtd = Convert.ToInt16(txtSecaoQtdConf.Text),
+                Descricao = txtDescricaoConf.Text.Trim(),
+                QuantidadeDeSecoes = Convert.ToInt16(txtSecaoQtdConf.Text),
                 data = DateTime.Now,
                 status = 0
             };
 
 
+            conferencia.ConferenciaId = Convert.ToInt32((new ConferenciaDao()).InsereConferencia(conferencia));
 
-
-            var ret = (new ConferenciaDao()).InsereConferencia(conferencia);
-
-            if (ret)
+            if (conferencia.ConferenciaId > 0)
             {
                 InicializalstVwConferencia();
+
+                var frm = new frmSecao(conferencia);
+                frm.ShowDialog();
             }
             else
             {
@@ -160,6 +161,11 @@ namespace ProjetoSecaoUI
         private void btnNovo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lstVWConferencia_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            visualizarSeçõesToolStripMenuItem_Click(sender, e);
         }
     }
 }
